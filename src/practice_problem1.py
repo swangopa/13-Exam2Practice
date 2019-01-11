@@ -40,8 +40,8 @@ def main():
     # UN-comment tests as you work the problems.
     ###########################################################################
 
-    # run_test_init()
-    # run_test_append_string()
+    run_test_init()
+    run_test_append_string()
     # run_test_double()
     # run_test_shrink()
     # run_test_double_then_shrink()
@@ -103,7 +103,10 @@ class Box(object):
         #    DIFFICULTY:      3
         #    TIME ESTIMATE:   5 minutes.
         # ---------------------------------------------------------------------
-
+        self.contents = contents
+        self.volume = volume
+        if len(contents)> volume:
+            self.contents = ''
     def append_string(self, additional_contents):
         """
         What comes in:
@@ -158,6 +161,13 @@ class Box(object):
         #       Read_this_ONLY_when_asked_Part_2.txt
         #    and complete your work on the problem.
         # ---------------------------------------------------------------------
+        if len(self.contents + additional_contents) <= self.volume:
+            self.contents = self.contents + additional_contents
+            return ''
+        else:
+            original = len(self.contents)
+            self.contents = self.contents + additional_contents[0:self.volume-len(self.contents)]
+            return additional_contents[self.volume-original:len(additional_contents)]
 
     def double(self):
         """
